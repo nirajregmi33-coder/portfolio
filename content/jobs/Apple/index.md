@@ -1,13 +1,16 @@
 ---
-date: '2017-12-21'
-title: 'UI Engineer Co-op'
-company: 'Apple'
-location: 'Cupertino, CA'
-range: 'July - December 2017'
-url: 'https://www.apple.com/music/'
+date: '2022-01-31'
+title: 'Software Engineer'
+company: 'Cedargate'
+location: 'Kathmandu, Nepal'
+range: 'Jan 2022 - Aug 2024'
+url: 'https://www.cedargate.com/'
 ---
 
-- Developed and styled interactive web applications for Apple Music using Ember and SCSS
-- Built and shipped the Apple Music Extension for Facebook Messenger leveraging third-party and internal API integrations
-- Architected and implemented the user interface of Apple Music's embeddable web player widget for in-browser user authorization and full song playback
-- Contributed extensively to the creation of MusicKit JS, a public-facing JavaScript SDK for embedding Apple Music players into web applications
+- Built **large-scale healthcare data pipelines** processing **20M+ records per day** for geocoding member locations using **Cascading Java, Hadoop, AWS, and Redshift**.  
+- Reimplemented the same workflows in **PySpark and Pig** to benchmark and optimize performance across different big data technologies.  
+- Developed the **PCP Attribution module**, a core healthcare system that processes millions of records to determine accurate **NPI values** for clients.  
+- Created a **Point-of-Service (POS) Winner Buffer** module to identify **eligible members for insurance** plans based on specific criteria.  
+- Designed workflows to **convert large Parquet files to CSV (and vice versa)** for downstream analytics and reporting.  
+- Utilized **AWS S3 for data storage** and **Amazon Redshift for querying and analytics**, improving data accessibility and processing efficiency.  
+

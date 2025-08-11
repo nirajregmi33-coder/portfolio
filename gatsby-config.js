@@ -2,10 +2,10 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Brittany Chiang',
+    title: 'Niraj Regmi',
     description:
-      'Brittany Chiang is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
-    siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
+      'Niraj Regmi is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
+    siteUrl: 'https://brittanychiang.com',
     image: '/og.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '@bchiang7',
   },
@@ -26,7 +26,7 @@ module.exports = {
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
         display: 'minimal-ui',
-        icon: 'src/images/logo.png',
+        icon: 'src/images/me.jpg.jpg',
       },
     },
     `gatsby-plugin-offline`,
@@ -55,7 +55,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `projects`,
-        path: `${__dirname}/content/projects`,
+        path: `${__dirname}/content/tutorials`,
       },
     },
     {

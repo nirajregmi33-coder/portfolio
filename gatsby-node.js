@@ -1,16 +1,13 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/node-apis/
- */
-
 const path = require('path');
 const _ = require('lodash');
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions;
+
+  // Templates
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve('src/templates/tag.js');
+  const tutorialTemplate = path.resolve(`src/templates/tutorial.js`); // ✅ for tutorials
 
   const result = await graphql(`
     {
@@ -27,6 +24,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
           }
         }
       }
+
+      tutorialsRemark: allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/content/tutorials/" } }
+        sort: { order: DESC, fields: [frontmatter___date] }
+      ) {
+        edges {
+          node {
+            frontmatter {
+              slug
+            }
+          }
+        }
+      }
+
       tagsGroup: allMarkdownRemark(limit: 2000) {
         group(field: frontmatter___tags) {
           fieldValue
@@ -41,9 +52,8 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return;
   }
 
-  // Create post detail pages
+  // ✅ Create post detail pages
   const posts = result.data.postsRemark.edges;
-
   posts.forEach(({ node }) => {
     createPage({
       path: node.frontmatter.slug,
@@ -52,9 +62,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     });
   });
 
-  // Extract tag data from query
+  // ✅ Create tutorial detail pages
+  const tutorials = result.data.tutorialsRemark.edges;
+  tutorials.forEach(({ node }) => {
+    createPage({
+      path: `/tutorials/${node.frontmatter.slug}`, // example: /tutorials/react-bigquery-node
+      component: tutorialTemplate,
+      context: {
+        slug: node.frontmatter.slug,
+      },
+    });
+  });
+
+  // ✅ Create tag pages
   const tags = result.data.tagsGroup.group;
-  // Make tag pages
   tags.forEach(tag => {
     createPage({
       path: `/pensieve/tags/${_.kebabCase(tag.fieldValue)}/`,
@@ -66,25 +87,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   });
 };
 
-// https://www.gatsbyjs.org/docs/node-apis/#onCreateWebpackConfig
+// ✅ Webpack alias (unchanged)
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  // https://www.gatsbyjs.org/docs/debugging-html-builds/#fixing-third-party-modules
   if (stage === 'build-html' || stage === 'develop-html') {
     actions.setWebpackConfig({
       module: {
         rules: [
-          {
-            test: /scrollreveal/,
-            use: loaders.null(),
-          },
-          {
-            test: /animejs/,
-            use: loaders.null(),
-          },
-          {
-            test: /miniraf/,
-            use: loaders.null(),
-          },
+          { test: /scrollreveal/, use: loaders.null() },
+          { test: /animejs/, use: loaders.null() },
+          { test: /miniraf/, use: loaders.null() },
         ],
       },
     });
