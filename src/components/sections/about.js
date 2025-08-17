@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
-import meImage from '../../images/me.jpg.jpg';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -162,7 +161,7 @@ const About = () => {
           <div className="wrapper">
             <StaticImage
               className="img"
-              src={meImage}
+              src="../../images/me.jpg"
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}
